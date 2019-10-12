@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="file tree Using JavaScript" />
+    <title>File Tree Using JavaScript</title>
+    <link rel="stylesheet" type="text/css" href="file-tree.css" />
+  </head>
+  <body style="background-color: white;">
+    <noscript> <h1>Please enable JavaScript.</h1> </noscript>
+
+    <!-- example start-->
+    <ul id="file-tree" class="file-tree">
+      <li><span>file</span></li>
+
+      <li>
+        <span class="folder-name">folder 1</span>
+        <ul>
+          <li><span>file 1</span></li>
+          <li><span>file 2</span></li>
+          <li>
+            <span class="folder-name">sub-folder</span>
+            <ul>
+              <li><span>file</span></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <span class="folder-name">folder 2</span>
+        <ul>
+          <li>
+            <span class="folder-name">sub-folder </span>
+            <ul>
+              <li><span>file</span></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <span class="folder-name">folder 3</span>
+        <ul>
+          <li><span>some-file</span></li>
+        </ul>
+      </li>
+
+      <li><span>file</span></li>
+    </ul>
+
+    <!-- example end-->
+
+     <!-- import and initialize fileTree function -->
+    <script src="file-tree.js"></script>
+    <script type="text/javascript">
+      window.onload = function() {
+        // passing element id to fileTree
+        fileTree('file-tree');
+      };
+    </script>
+  </body>
+</html>
