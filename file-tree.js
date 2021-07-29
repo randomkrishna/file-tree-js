@@ -8,7 +8,7 @@ function fileTree(elementId) {
   var liElementsInideUl = element.querySelectorAll('li');
   liElementsInideUl.has('ul').forEach(li => {
     li.classList.add('folder-root');
-    li.classList.add('closed');
+    // li.classList.add('closed');
     var spanFolderElementsInsideLi = li.querySelectorAll('span.folder-name');
     spanFolderElementsInsideLi.forEach(span => {
       if (span.parentNode.nodeName === 'LI') {

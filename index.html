@@ -1,40 +1,97 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="file tree Using JavaScript" />
-    <title>File Tree Using JavaScript</title>
-    <link rel="stylesheet" type="text/css" href="file-tree.css" />
-  </head>
-  <body style="background-color: white;">
-    <noscript> <h1>Please enable JavaScript.</h1> </noscript>
 
-    <!-- example start-->
-    <ul id="file-tree" class="file-tree">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Project File Tree" />
+  <title>File Tree Using JavaScript</title>
+  <link rel="stylesheet" type="text/css" href="file-tree.css" />
 
-      <li>
-        <span class="folder-name">folder 3</span>
-        <ul>
-          <li><span>some-file</span></li>
-        </ul>
-      </li>
+  <style>
+    .tmp {
+      display: none;
+    }
+  </style>
+</head>
 
-    </ul>
+<body style="background-color: white;">
+  <noscript>
+    <h1>Please enable JavaScript.</h1>
+  </noscript>
 
-    <!-- example end-->
+  <title>Project File Tree</title>
+  <h1>Project File Tree</h1>
 
-     <!-- import and initialize fileTree function -->
-    <script src="file-tree.js"></script>
-    <script type="text/javascript">
-      window.onload = function() {
-        // passing element id to fileTree
-        fileTree('file-tree');
-      };
-    </script>
-  </body>
+  <ul id="file-tree" class="file-tree">
+
+    <li class="tmp">
+      <span class="folder-name">template</span>
+      <ul class="fileList">
+        <li class=listItem><span class="span"><a class="link" href=""></a></span></li>
+      </ul>
+    </li>
+
+  </ul>
+
+  <script>
+    const tree = document.querySelector("#file-tree");
+    const projects = ["IT202-Spring2021-project1", "IT202-Spring2021-project2"];
+    const api = "https://api.github.com/repos/sbrahm6/";
+    const gp = "https://sbrahm6.github.io/";
+
+    const tmp = document.querySelector(".tmp");
+
+
+    for (let proj of projects) {
+
+      const clone = tmp.cloneNode(true);
+      clone.classList.add("project");
+      const ul = clone.querySelector(".fileList");
+      const link = clone.querySelector(".link");
+      const li = clone.querySelector(".listItem").cloneNode(true);
+
+      (async () => {
+        const response = await fetch(api + proj);
+        const data = await response.json();
+
+        const href = `${data.html_url}`;
+        const name = `${data.name}`;
+        clone.querySelector(".folder-name").innerText = name;
+        // link.before(name + " - ");
+
+
+        link.innerText = "Repository";
+        link.href = href;
+
+        li.querySelector(".link").href = gp + name;
+        // li.querySelector(".link").before(name + " - ");
+        li.querySelector(".link").innerText = "Deployment";
+
+
+        // console.log(ul, li)
+      })();
+
+      console.log(li);
+      ul.appendChild(li);
+
+      // console.log(clone);
+      clone.classList.remove("tmp");
+      tree.appendChild(clone);
+
+    }
+  </script>
+
+
+  <!-- import and initialize fileTree function -->
+  <script src="file-tree.js"></script>
+  <script type="text/javascript">
+    window.onload = function () {
+      // passing element id to fileTree
+      fileTree('file-tree');
+    };
+  </script>
+</body>
+
 </html>
